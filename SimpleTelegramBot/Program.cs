@@ -11,8 +11,6 @@ namespace SimpleTelegramBot
             TextScrapper tx = new TextScrapper();
             var aList = new ConnectionController().getScrappedAdresses(tx.getStringFromFile(@"E:\proxyListSite.txt"), "tbody/tr/td");
 
-
-
             for (int i = 0; i < aList.Count; i++)
             {
                 Console.WriteLine($"Country: {aList[i].Country} \nAdress: {aList[i].ConnectionAdress} \nPort: {aList[i].Port}\n");
@@ -51,6 +49,5 @@ namespace SimpleTelegramBot
                 return false;
             }
         }
-
     }
 }

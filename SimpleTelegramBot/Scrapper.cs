@@ -6,7 +6,7 @@ namespace SimpleTelegramBot
 {
     class Scrapper : IScrapper
     {
-        string Adress;
+        private string Adress { get; set; }
 
         public Scrapper(string Adress)
         {
@@ -17,9 +17,7 @@ namespace SimpleTelegramBot
         {
 
             HtmlWeb web = new HtmlWeb();
-
             var htmlDoc = web.Load(Adress);
-
             HtmlNodeCollection node = htmlDoc.DocumentNode.SelectNodes(pathToTheTag);
 
             StringBuilder sb = new StringBuilder();

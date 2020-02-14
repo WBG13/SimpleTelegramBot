@@ -12,15 +12,16 @@ namespace SimpleTelegramBot
             string[] splitedTags = splitTags(tagPath);
 
             HtmlWeb web = new HtmlWeb();
-
             var htmlDoc = web.Load(siteAdress);
 
             StringBuilder sb = new StringBuilder();
             List<ScrappedAdress> aList = new List<ScrappedAdress>();
             HtmlNodeCollection node = htmlDoc.DocumentNode.SelectNodes("//" + splitedTags[splitedTags.Length - 3]);
 
-            Console.WriteLine(splitedTags[splitedTags.Length - 2]);
-            Console.WriteLine(splitedTags[splitedTags.Length - 1]);
+            for (int i = 0; i < aList.Count; i++)
+            {
+                Console.WriteLine($"Country: {aList[i].Country} \nAdress: {aList[i].ConnectionAdress} \nPort: {aList[i].Port}\n");
+            }
 
             foreach (var tagNode in node.Descendants(splitedTags[splitedTags.Length - 2]))
             {
@@ -32,7 +33,9 @@ namespace SimpleTelegramBot
                         sab.FilterPart(tag);
                     }
                 }
-                aList.Add((ScrappedAdress)sab.buildScrappedObject());
+                ScrappedAdress sa = (ScrappedAdress)sab.buildScrappedObject();
+                if (sa.Country == "") { aList.Add(sa); } //TODO find error
+                aList.Add(sa);
             }
             return aList;
         }
@@ -40,7 +43,7 @@ namespace SimpleTelegramBot
         private string stringQualifier(string request)
         {
             int integerTest;
-            if (request.Length == 2 && request != "no")
+            if (request.Length == 2 && request != "no" && request != "RU")
             {
                 return "Country";
             }

@@ -81,7 +81,7 @@ namespace SimpleTelegramBot
                 {
                     try
                     {
-                        Console.WriteLine($"Trying to connect to the: ({scrappedAdresses[i].Country}) {scrappedAdresses[i].ConnectionAdress} : {scrappedAdresses[i].Port}");
+                        Console.WriteLine($"Trying to connect to the: ({scrappedAdresses[i].Country}) {scrappedAdresses[i].ConnectionAdress}:{scrappedAdresses[i].Port}");
                         ServicePointManager.Expect100Continue = false;
                         var proxy = new WebProxy(scrappedAdresses[i].ConnectionAdress, scrappedAdresses[i].Port)
                         {
@@ -90,8 +90,7 @@ namespace SimpleTelegramBot
                         Console.Write("Statement: ");
                         botClient = new TelegramBotClient(token, proxy);
                         me = botClient.GetMeAsync().Result;
-
-                        break;
+                        //break;
                     }
                     catch { writeMessage("Failed"); }
                 }

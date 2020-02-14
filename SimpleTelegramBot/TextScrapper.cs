@@ -5,8 +5,7 @@ namespace SimpleTelegramBot
     {
         public string getStringFromFile(string fileLocation)
         {
-            string text = System.IO.File.ReadAllText(fileLocation);
-            return text;
+            return System.IO.File.ReadAllText(fileLocation);
         }
     }
 }
