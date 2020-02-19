@@ -1,5 +1,4 @@
-﻿
-namespace SimpleTelegramBot
+﻿namespace SimpleTelegramBot
 {
     public abstract class ScrappedObject
     {

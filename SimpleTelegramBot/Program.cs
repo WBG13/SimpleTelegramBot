@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System;
+﻿using System;
 using System.Net.NetworkInformation;
 
 namespace SimpleTelegramBot
@@ -21,16 +20,6 @@ namespace SimpleTelegramBot
             telegram.connect();
 
             Console.ReadLine();
-        }
-
-
-        private static void Save(string name, string savingText)
-        {
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, name)))
-            {
-                outputFile.WriteLine(savingText);
-            }
         }
 
         private static bool CanPing(string address)

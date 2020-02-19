@@ -34,16 +34,16 @@ namespace SimpleTelegramBot
                     }
                 }
                 ScrappedAdress sa = (ScrappedAdress)sab.buildScrappedObject();
-                if (sa.Country == "") { aList.Add(sa); } //TODO find error
-                aList.Add(sa);
+                if (sa.Country != "" && sa.Country != null) { aList.Add(sa); }
             }
+            FilesIO.serializeList("serList", aList);
             return aList;
         }
 
         private string stringQualifier(string request)
         {
             int integerTest;
-            if (request.Length == 2 && request != "no" && request != "RU")
+            if (request.Length == 2 && request != "no" && request != "(RU)")
             {
                 return "Country";
             }

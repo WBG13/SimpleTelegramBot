@@ -14,9 +14,8 @@ namespace SimpleTelegramBot
 
         public TelegramBotController(List<ScrappedAdress> scrappedAdresses)
         {
-            TextScrapper tx = new TextScrapper();
             this.scrappedAdresses = scrappedAdresses;
-            this.token = tx.getStringFromFile(@"E:\adress.txt"); ;
+            this.token = FilesIO.getStringFromFile("adress.txt", "E:\\");//@"E:\adress.txt"); ;
         }
         static public ITelegramBotClient botClient { get; private set; }
 
@@ -77,7 +76,7 @@ namespace SimpleTelegramBot
             Telegram.Bot.Types.User me = null;
             for (int i = 0; i < scrappedAdresses.Count; i++)
             {
-                if (scrappedAdresses[i].Port == 8080 || scrappedAdresses[i].Port == 80)
+                if (scrappedAdresses[i].Port == 8080)
                 {
                     try
                     {
@@ -90,7 +89,7 @@ namespace SimpleTelegramBot
                         Console.Write("Statement: ");
                         botClient = new TelegramBotClient(token, proxy);
                         me = botClient.GetMeAsync().Result;
-                        //break;
+                        break;
                     }
                     catch { writeMessage("Failed"); }
                 }
