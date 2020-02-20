@@ -37,7 +37,6 @@ namespace SimpleTelegramBot
 
         public static void serializeList(string fileName, List<ScrappedAdress> so, string filePath = null)
         {
-            //StringWriter sw = new StringWriter(new StringBuilder()); 
             string serObj = JsonConvert.SerializeObject(so);
             saveString(fileName, serObj, filePath);
         }

@@ -15,7 +15,7 @@ namespace SimpleTelegramBot
         public TelegramBotController(List<ScrappedAdress> scrappedAdresses)
         {
             this.scrappedAdresses = scrappedAdresses;
-            this.token = FilesIO.getStringFromFile("adress.txt", "E:\\");//@"E:\adress.txt"); ;
+            this.token = FilesIO.getStringFromFile("adress.txt", "E:\\");
         }
         static public ITelegramBotClient botClient { get; private set; }
 
@@ -35,6 +35,7 @@ namespace SimpleTelegramBot
         static private async void recieveMessage()
         {
             writeMessage("Start recieving message");
+            string lastMessage = null;
             var lastMessageId = 0;
             int lastMessageLength = 0;
             Telegram.Bot.Types.Update last = null;
@@ -47,16 +48,14 @@ namespace SimpleTelegramBot
                     if (message.Length > 0)
                     {
                         last = message[message.Length - 1];
-                        if (lastMessageId != last.Id)
+                        if (lastMessage != last.Message.Text && DateTime.UtcNow < last.Message.Date.AddSeconds(10).ToUniversalTime())
                         {
-
-                            lastMessageId = last.Id;
-                            Console.WriteLine(last.Message.Text);
-
+                            lastMessage = last.Message.Text;
                             if (last.Message.Text.Contains("hello"))
                             {
                                 botClient.SendTextMessageAsync(last.Message.From.Id, "hello");
                             }
+                            
                         }
 
                     }
@@ -64,9 +63,11 @@ namespace SimpleTelegramBot
                     Thread.Sleep(200);
                 }
                 catch (System.Net.Http.HttpRequestException e)
-                //TODO Find exit if take this exception
+                //TODO current decision are not acceptable
                 {
-
+                    Console.WriteLine("Error in recieve message");
+                    Thread thread = new Thread(TelegramBotController.recieveMessage);
+                    thread.Start();
                 }
             }
         }

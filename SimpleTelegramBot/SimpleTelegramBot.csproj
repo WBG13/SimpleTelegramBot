@@ -71,7 +71,6 @@
     <Compile Include="ScrappedObjectBuilder.cs" />
     <Compile Include="Scrapper.cs" />
     <Compile Include="TelegramBotController.cs" />
-    <Compile Include="TextScrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

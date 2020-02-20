@@ -7,8 +7,7 @@ namespace SimpleTelegramBot
     {
         public static void SimpleTelegramBot()
         {
-            TextScrapper tx = new TextScrapper();
-            var aList = new ConnectionController().getScrappedAdresses(tx.getStringFromFile(@"E:\proxyListSite.txt"), "tbody/tr/td");
+            var aList = new ConnectionController().getScrappedAdresses(FilesIO.getStringFromFile("proxyListSite.txt", "E:\\"), "tbody/tr/td");
 
             for (int i = 0; i < aList.Count; i++)
             {
